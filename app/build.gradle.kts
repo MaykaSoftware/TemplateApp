@@ -1,23 +1,19 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    kotlin("kapt")
 }
 
 android {
     namespace = "com.farid.templateapp"
-    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.farid.templateapp"
-        minSdk = 26
-        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
     buildTypes {
@@ -29,41 +25,74 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
     }
 }
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+
+    testImplementation(libs.androidx.junit)
+    testImplementation(libs.androidx.test.core)
+    testImplementation(libs.androidx.archCoreTesting)
+    testImplementation(libs.jetbrains.kotlinCoroutinesTest)
+    testImplementation(libs.google.truth)
+    testImplementation(libs.io.mockk)
+    testImplementation(libs.cash.turbine)
+    implementation(libs.androidx.compose.test.junit4)
+
+    androidTestImplementation(libs.androidx.junit.ext)
+    androidTestImplementation(libs.androidx.runner)
+    androidTestImplementation(libs.androidx.rules)
+    androidTestImplementation(libs.androidx.compose.test.junit4)
+    debugImplementation(libs.androidx.compose.tooling)
+    debugImplementation(libs.androidx.compose.test.manifest)
+
+    androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.android.compiler)
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.activity.compose)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.graphics)
+    implementation(libs.androidx.compose.tooling.preview)
+    implementation(libs.androidx.compose.material3)
+
+    //compose
+    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.material.icons.extended)
+
+    //Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.hilt.navigation.compose)
+
+    //Room
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
+    implementation(libs.room.paging)
+    //Kotlin extensions
+    implementation(libs.room.ktx)
+
+    implementation(libs.kotlinx.serialization.json)
+
+    //Coil compose
+    implementation(libs.coil.compose)
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter)
+    implementation(libs.okhttp3.logging.interceptor)
+
+    //Navigation
+    implementation(libs.navigation.compose)
+
+    //splash
+    implementation(libs.splashscreen)
 }

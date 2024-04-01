@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Template App"
 include(":app")
+include(":feature:onboarding:data")
