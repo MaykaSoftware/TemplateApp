@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/feature/onboarding" />
             <option value="$PROJECT_DIR$/feature/onboarding/data" />
             <option value="$PROJECT_DIR$/feature/onboarding/domain" />
+            <option value="$PROJECT_DIR$/feature/onboarding/ui" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
