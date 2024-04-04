@@ -33,6 +33,8 @@ android {
 
 dependencies {
 
+    implementation(project(":feature:onboarding:ui"))
+
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
     androidTestImplementation(composeBom)
@@ -47,8 +49,6 @@ dependencies {
     implementation(libs.androidx.compose.test.junit4)
 
     androidTestImplementation(libs.androidx.junit.ext)
-    androidTestImplementation(libs.androidx.runner)
-    androidTestImplementation(libs.androidx.rules)
     androidTestImplementation(libs.androidx.compose.test.junit4)
     debugImplementation(libs.androidx.compose.tooling)
     debugImplementation(libs.androidx.compose.test.manifest)
